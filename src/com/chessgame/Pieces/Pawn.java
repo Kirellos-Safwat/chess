@@ -35,13 +35,12 @@ public class Pawn extends Piece {
 			return false;
 		}
 		//	to capture after enpassant move
-		if(moves.contains(move)) {
+		if(moves.contains(move)) {//equals
 			if(toX == xCord + 1 && yCord -(isWhite ? 1 : -1) == toY) {
 				if(board.getXY(toX, toY) == 0) {
 					board.deadPieces.add(board.getPiece(xCord + 1, yCord));
 					Game.AllPieces.remove(board.getPiece(xCord + 1, yCord));
 					Game.fillPieces();
-//					board.setXY(xCord + 1, yCord, 0);					// stopped hereeeeeeeeeeeeeee
 					board.setPieceIntoBoard(xCord + 1, yCord, null);
 
 				}
@@ -51,7 +50,6 @@ public class Pawn extends Piece {
 					board.deadPieces.add(board.getPiece(xCord - 1, yCord));
 					Game.AllPieces.remove(board.getPiece(xCord - 1, yCord));
 					Game.fillPieces();
-					board.setXY(xCord -1, yCord, 0);
 					board.setPieceIntoBoard(xCord - 1, yCord, null);
 				}
 			}

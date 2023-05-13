@@ -60,9 +60,9 @@ public class Move implements Comparable<Move>{
 		}
 		return -1;
 	}
-	// ???????
 	//	 called when comparing two objects using the == operator or The contains() method
 	//	 would then use the equals() method to compare the object you passed in with each object in the moves list
+	//	to compare the desired move with moves in possible moves list
 	public boolean equals(Object o) {
 		Move otherM = (Move) o;
 		return this.getToX() == otherM.getToX() && this.getToY() == otherM.getToY()

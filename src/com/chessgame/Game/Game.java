@@ -101,8 +101,6 @@ public class Game {
 				}
 			}
 			printer.close();
-
-
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "an error occured" + e);
 		}
@@ -199,21 +197,6 @@ public class Game {
 		DeadPieces();
 	}
 
-//	public void randomPlay() {
-//		if (gameOver) {
-//			return;
-//		}
-//		if (!player) {
-//			Random r = new Random();
-//			active = bPieces.get(r.nextInt(bPieces.size()));
-//			while (active.getMoves().isEmpty()) {
-//				active = bPieces.get(r.nextInt(bPieces.size()));
-//			}
-//			Move m = active.getMoves().get(r.nextInt(active.getMoves().size()));
-//			move(m.getToX(), m.getToY());
-//		}
-//	}
-
 	public void selectPiece(int x, int y) {
 		if (active == null && board.getPiece(x, y) != null && board.getPiece(x, y).isWhite() == player) {
 			active = board.getPiece(x, y);
@@ -272,20 +255,39 @@ public class Game {
 		}
 	}
 
-	// ????????
+	/*
+	Copying and cloning pieces and board is necessary in this method for a few reasons.
+Firstly, we need to make a copy of the board in order to apply the possible moves of the active piece without modifying
+ the actual game state. We don't want to make actual moves on the game board and then undo them if they turn out to be
+ illegal - this would be inefficient and could cause bugs if the undo operation is not implemented correctly.
+So, by cloning the board and applying moves to the clone, we can check for legality without affecting the actual game state.
+
+Secondly, we need to clone the active piece and the enemy pieces in order to generate all possible moves on the cloned board.
+ If we were to generate moves on the original pieces, this would again modify the actual game state, which we want to avoid.
+ By cloning the pieces, we can generate moves on the clones without affecting the original game pieces.
+
+Finally, by cloning the pieces, we can ensure that any modifications made to the clones during the legality check
+do not affect the original pieces. For example, the active piece might be moved during the check to see whether
+a move would result in checkmate for the active player's king. If we modified the original piece directly,
+this would affect the game state and potentially cause bugs. But by cloning the piece and making any necessary
+modifications to the clone, we can ensure that the original game state is not affected
+	 */
+	// in brief, this method is for, when your king is in check no possible move is done unless it was to protect your
+	// king or to move it
+	// and this method is also for the case when you want to move a piece that protect the king
 	public static void checkLegalMoves(Piece piece) {
 		List<Move> movesToRemove = new ArrayList<>();
-		Board clonedBoard ;	//
-		Piece clonedActive = piece.getClone();	//	each piece of the team that has to play
+		Board clonedBoard ;
+		Piece clonedActive = piece.getClone();
 
 		for (Move move : clonedActive.getMoves()) {
 			clonedBoard = board.getNewBoard();
-//			clonedActive = piece.getClone();
+			clonedActive = piece.getClone();
 
 			clonedActive.makeMove(move.getToX(), move.getToY(), clonedBoard);
 
 			List<Piece> enemyPieces;
-			Piece king;
+			Piece king ;
 
 			if (piece.isWhite()) {
 				enemyPieces = bPieces;
@@ -451,11 +453,7 @@ public class Game {
 				col = 0;
 			}
 			if (Character.isLetter(c)) { //if lower case is black , if upper case is white
-				if (Character.isLowerCase(c)) {
-					addToBoard(col, row, c, false);
-				} else {
-					addToBoard(col, row, c, true);
-				}
+				addToBoard(col, row, c, !Character.isLowerCase(c));
 				col++;
 			}
 			if (Character.isDigit(c)) {

@@ -115,7 +115,6 @@ public class Board {
 		 grid[x][y] = v ;
 	}
 
-	//	why creating new board with same state
 	public Board getNewBoard() {
 		Board b = new Board();
 		for(int i=0; i<8; i++) {
