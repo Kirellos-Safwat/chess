@@ -39,7 +39,7 @@ public class Knight extends Piece{
 		int j = Math.abs(y-yCord);
 
 		if(i == 2 && j == 3) return true;
-		return i == 3 && j == 2;
+		return (i == 3 && j == 2);
 	}
 	public void cannotMove(int x, int y, Board board){
 		if(knightMove(x,y,board))
