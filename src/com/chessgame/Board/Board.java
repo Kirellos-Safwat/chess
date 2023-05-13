@@ -22,7 +22,7 @@ public class Board {
 	public Piece died;
 	public Stack<Move> lastMoves = new Stack<>();
 	public Stack<Piece> deadPieces = new  Stack<>();
-	public  List<Piece> piecesList = new ArrayList<>();
+//	public  List<Piece> piecesList = new ArrayList<>();
 
         
 
@@ -36,7 +36,7 @@ public class Board {
 		if(piece != null) {
 			grid[x][y] = piece.getValueInTheBoard();
 			pieces[x][y] = piece;
-			piecesList.add(piece);			
+//			piecesList.add(piece);
 		}else {
 			grid[x][y] = 0;
 			pieces[x][y] = null;
@@ -50,7 +50,7 @@ public class Board {
 		if(pieces[toX][toY] != null) {
 			died = pieces[toX][toY];
 			deadPieces.add(died);
-			piecesList.remove(died);
+//			piecesList.remove(died);
 			Game.AllPieces.remove(died);
 			Game.fillPieces();
 		}else {
@@ -120,7 +120,7 @@ public class Board {
 		for(int i=0; i<8; i++) {
 			for(int j=0; j<8; j++) {
 				if(this.getPiece(i, j) != null) {
-					b.setPieceIntoBoard(i, j, this.getPiece(i, j).getClone());	// why cloning ?????
+					b.setPieceIntoBoard(i, j, this.getPiece(i, j).getClone());
 				}
 			}
 		}
@@ -164,8 +164,9 @@ public class Board {
 		saveData(s.toString());
 	}
 	public static void saveData(String s){
+		//this method saves the string which stores the positions, time, and players' names inside the text file
 		String CurrentContinueFilePath = String.format("Continue/%s.txt", Login.usernamex);
-                File file = new File(CurrentContinueFilePath);
+        File file = new File(CurrentContinueFilePath);
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                             writer.write(s);
 		} catch (IOException e) {

@@ -64,6 +64,8 @@ public abstract class Piece implements Cloneable{//to enable the creation of a n
 		this.isWhite = isWhite;
 		isAlive = true;
 		this.board = board;
+		//every piece has an integer value represent it and the sign represent the color of it
+		//example: white pawn take value 5 and black pawn take value -5
 		initializeSide(value);
 		board.setPieceIntoBoard(x, y, this);
 	}
@@ -77,6 +79,8 @@ public abstract class Piece implements Cloneable{//to enable the creation of a n
 		Graphics2D g2 = (Graphics2D) g;
 		
 		for(Move m: moves) {
+			//remember arrayList moves will have possible moves (blocks that you can go may be empty or have enemy piece)
+			//if there is enemy piece in this block set yellow color and if it is empty set green color
 			if(board.getPiece(m.getToX(), m.getToY()) != null && board.getPiece(m.getToX(), m.getToY()).isWhite() != isWhite()) {
 				g.setColor(Color.YELLOW);
 			}else {
@@ -97,6 +101,8 @@ public abstract class Piece implements Cloneable{//to enable the creation of a n
 	public void show_impossible_moves(Graphics g , JPanel panel){
 		Graphics2D g2 = (Graphics2D) g;
 		for(Move m: cannotMove){
+			//remember arrayList cannotMoves have the blocks that you your piece has the required mechanism to go to but there is ally piece
+			//so we set red color
 			if(board.getPiece(m.getToX(), m.getToY()) != null && board.getPiece(m.getToX(), m.getToY()).isWhite() == isWhite()){
 				g2.setColor(Color.RED);
 				g2.fillOval((m.getToX()*size) + size/3, (m.getToY()*size) + size/3, size/3, size/3);

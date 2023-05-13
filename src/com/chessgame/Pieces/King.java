@@ -48,8 +48,11 @@ public class King extends Piece {
 
 	@Override
 	public boolean canMove(int x, int y, Board board) {
+		//if the place that it is going to have ally piece, go to method cannotMove
 		if (board.getPiece(x,y) != null && board.getPiece(x,y).isWhite() == isWhite())
 			cannotMove(x,y,board);
+
+		//check if the king has the required mechanisms to reach this block(in method kingMoves)
 		if( kingMoves(x,y,board)) {
 			if(board.getPiece(x, y) == null) {
 				return true;
