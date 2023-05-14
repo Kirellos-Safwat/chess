@@ -1,4 +1,5 @@
 package com.chessgame.Pieces;
+import Login_Form.Login;
 import com.chessgame.Board.Board;
 import com.chessgame.Board.Move;
 
@@ -16,7 +17,10 @@ public class Rook extends Piece {
 	}
 	public Rook(boolean isWhite){
 		super(isWhite);
-		image = new ImageIcon(isWhite ? "wr.png" : "br.png");
+		if (Login.theme)
+			image = new ImageIcon(isWhite ? "wrn.png" : "brn.png");
+		else
+			image = new ImageIcon(isWhite ? "wr.png" : "br.png");
 	}
 	//to get the image of piece(rook)
 	public void initializeSide(int value){ //to plot the rook after initializing its side(black/white)

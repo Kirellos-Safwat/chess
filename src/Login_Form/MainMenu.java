@@ -32,7 +32,6 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         setIconImage();
-        
     }
 
    
@@ -82,6 +81,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 SettingsButtonMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsButtonMouseClicked(evt);
             }
         });
         getContentPane().add(SettingsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 250, -1));
@@ -134,9 +136,12 @@ public class MainMenu extends javax.swing.JFrame {
         });
         getContentPane().add(ContinueButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 250, 90));
 
-        Login_Background_Video.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login_Form/Backgroundnew.jpg"))); // NOI18N
-        //Login_Background_Video.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Backgroundnew.png")));
-        Login_Background_Video.setText("jLabel2");
+        if(Login.theme)
+            Login_Background_Video.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login_Form/theme/Multiverse Main Menu.png"))); // NOI18N
+        else
+            Login_Background_Video.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login_Form/Backgroundnew.jpg"))); // NOI18N
+
+        Login_Background_Video.setText("");
         getContentPane().add(Login_Background_Video, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -1, 1270, 810));
 
         setSize(new java.awt.Dimension(1281, 783));
@@ -277,9 +282,14 @@ public class MainMenu extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
         
+    }
+
+    private void SettingsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsButtonMouseExited
+        music.PlaySoundEffect(soundEffect);
+        Login.settings.setVisible(true);
+        new Settings();
     }//GEN-LAST:event_NewGameButtonMouseClicked
-    
-   
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -11,6 +11,7 @@ import java.io.InputStream;
 
 public class Music {
     Clip clip;
+    Clip SoundEffect;
 
      public void PlayMusic (String musicLocation){
         InputStream music;
@@ -21,22 +22,40 @@ public class Music {
                 clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-                //clip.loop(clip.LOOP_CONTINUOUSLY);
+//                clip.loop(clip.LOOP_CONTINUOUSLY);
 
             }
             else {
                 System.out.println("Can not find the file Specified");
             }
+        }
+        catch(Exception eX) {
+            eX.printStackTrace();
+        }
 
+    }
 
+    public void PlaySoundEffect (String musicLocation){
+        InputStream music;
+        try{
+            File musicPath = new File(musicLocation);
+            if (musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                SoundEffect = AudioSystem.getClip();
+                SoundEffect.open(audioInput);
+                SoundEffect.start();
+                //clip.loop(clip.LOOP_CONTINUOUSLY);
+            }
+            else {
+                System.out.println("Can not find the file Specified");
+            }
         }
         catch(Exception eX) {
             eX.printStackTrace();
 
-
         }
-
     }
+
   public void StopMusic (String musicLocation){
       clip.stop();
       clip.close();

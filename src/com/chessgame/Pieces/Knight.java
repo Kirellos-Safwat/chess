@@ -1,4 +1,5 @@
 package com.chessgame.Pieces;
+import Login_Form.Login;
 import com.chessgame.Board.Board;
 import com.chessgame.Board.Move;
 
@@ -12,7 +13,10 @@ public class Knight extends Piece{
 
 	public Knight(boolean isWhite){
 		super(isWhite);                                    // calling constructor from Piece class
-		image = new ImageIcon(isWhite ? "wn.png" : "bn.png");
+		if(Login.theme)
+			image = new ImageIcon(isWhite ? "wnn.png" : "bnn.png");
+		else
+			image = new ImageIcon(isWhite ? "wn.png" : "bn.png");
 	}
 
 	// to get the image of piece(knight)

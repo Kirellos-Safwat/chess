@@ -159,8 +159,11 @@ public class SetUp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 740, 140, 60));
+        if (Login.theme)
+            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login_Form/theme/Monkey Playing Chess.jpg"))); // NOI18N
+        else
+            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login_Form/PlayerMenuuu (1).jpg"))); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login_Form/PlayerMenuuu (1).jpg"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.setPreferredSize(new java.awt.Dimension(1460, 810));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 1210, 810));

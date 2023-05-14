@@ -13,6 +13,10 @@ public class Login extends javax.swing.JFrame {
     public static String usernamex;
     public static String passwordx;
 
+    public static boolean theme = false;
+
+    public static Settings settings;
+
     public Login() {
         initComponents();
         setIconImage();
@@ -120,6 +124,7 @@ public class Login extends javax.swing.JFrame {
                         this.dispose();   
                         MainMenu mainmenu = new MainMenu();
                         mainmenu.setVisible(true);
+                        settings = new Settings();
                         check = true;
                         break;
                    }

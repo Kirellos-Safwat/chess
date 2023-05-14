@@ -1,4 +1,5 @@
 package com.chessgame.Pieces;
+import Login_Form.Login;
 import com.chessgame.Board.Board;
 import com.chessgame.Board.Move;
 import com.chessgame.Game.Game;
@@ -14,7 +15,10 @@ public class Pawn extends Piece {
 	}
 	public Pawn(boolean isWhite){
 		super(isWhite);
-		image = new ImageIcon(isWhite ? "wp.png" : "bp.png");
+		if (Login.theme)
+			image = new ImageIcon(isWhite ? "wpn.png" : "bpn.png");
+		else
+			image = new ImageIcon(isWhite ? "wp.png" : "bp.png");
 	}
 	
 	//detecting the image of the piece(pawn)

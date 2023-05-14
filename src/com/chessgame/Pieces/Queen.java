@@ -1,4 +1,5 @@
 package com.chessgame.Pieces;
+import Login_Form.Login;
 import com.chessgame.Board.Board;
 import com.chessgame.Board.Move;
 
@@ -12,7 +13,10 @@ public class Queen extends Piece {
 	}
 	public Queen(boolean isWhite){
 		super(isWhite);
-		image = new ImageIcon(isWhite ? "wq.png" : "bq.png");
+		if (Login.theme)
+			image = new ImageIcon(isWhite ? "wqn.png" : "bqn.png");
+		else
+			image = new ImageIcon(isWhite ? "wq.png" : "bq.png");
 	}
 	//detecting the image of the piece(queen)
 	@Override

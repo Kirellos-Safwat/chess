@@ -1,5 +1,6 @@
 package com.chessgame.Pieces;
 
+import Login_Form.Login;
 import com.chessgame.Board.*;
 
 import javax.swing.*;
@@ -12,7 +13,10 @@ public class Bishop extends Piece {
 	}
 	public Bishop(boolean isWhite){
 		super(isWhite);
-		image = new ImageIcon(isWhite ? "wb.png" : "bb.png");
+		if (Login.theme)
+			image = new ImageIcon(isWhite ? "wbn.png" : "bbn.png");
+		else
+			image = new ImageIcon(isWhite ? "wb.png" : "bb.png");
 	}
 	//detecting the image of the piece(bishop)
 	public void initializeSide(int value) {

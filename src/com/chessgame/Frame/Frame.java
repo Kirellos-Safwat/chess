@@ -1,7 +1,5 @@
 package com.chessgame.Frame;
-import Login_Form.MainMenu;
-import Login_Form.Player;
-import Login_Form.SetUp;
+import Login_Form.*;
 import com.chessgame.Game.Game;
 
 import javax.swing.*;
@@ -22,6 +20,10 @@ public class Frame extends JFrame {
 	JLabel player2 = new JLabel(SetUp.player2.name);
 	public static JPanel wDead;
 	public static JPanel bDead;
+
+	private JButton settingsButton;
+	Music music = new Music();
+	String soundEffect = "MenuSoundEffect.wav";
 	public Frame() {
 
 		this.setSize(1000, 820);
@@ -82,6 +84,15 @@ public class Frame extends JFrame {
 
 
 		JPanel sPanel = new JPanel(new BorderLayout());
+		settingsButton = new JButton("Settings");
+		settingsButton.setBackground(new Color(204, 204, 204));
+		settingsButton.setFont(new Font("Papyrus", 2, 24)); // NOI18N
+		settingsButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				settingsButtonActionPerformed(evt);
+			}
+		});
+		sPanel.add(settingsButton,BorderLayout.WEST);
 //		sPanel.add(back, BorderLayout.WEST);
 //		JPanel ePanel = new JPanel();
 //		JPanel wPanel = new JPanel();
@@ -100,6 +111,11 @@ public class Frame extends JFrame {
 //		add(wPanel, BorderLayout.WEST);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+	}
+
+	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		music.PlaySoundEffect(soundEffect);
+		Login.settings.setVisible(true);
 	}
 //	private void backActionPerformed(java.awt.event.ActionEvent evt){
 ////		System.exit(0);
