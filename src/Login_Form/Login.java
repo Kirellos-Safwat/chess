@@ -103,7 +103,6 @@ public class Login extends javax.swing.JFrame {
                 
            usernamex = UserName_Field.getText();
            passwordx = Password_Field.getText();
-   
 
            try
            {
@@ -117,9 +116,6 @@ public class Login extends javax.swing.JFrame {
                    String username = scan.next();
                    String password = scan.next();   
 
-                  
-
-               
                    if(usernamex.equals(username.trim()) && passwordx.equals(password.trim())){
                         this.dispose();   
                         MainMenu mainmenu = new MainMenu();
@@ -138,7 +134,6 @@ public class Login extends javax.swing.JFrame {
            {
                JOptionPane.showMessageDialog(null,"an error occured"+e);
            }
-                
 
             }
     }//GEN-LAST:event_LogIn_ButtonActionPerformed

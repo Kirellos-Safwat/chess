@@ -4,8 +4,10 @@
  */
 package Login_Form;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -104,23 +106,51 @@ public class Register extends javax.swing.JFrame {
         String username = Username_Field.getText();
         String password = Password_Field.getText();
 
-        try {
-            FileOutputStream AccountsData = new FileOutputStream("AccountsData.txt", true);
-            PrintWriter printer = new PrintWriter(AccountsData);
+        String savedUserName;
+        try
+        {
+            File AccountsData = new File("AccountsData.txt");
+            Scanner scan = new Scanner (AccountsData);
+            scan.useDelimiter("[,\n]");
+            boolean check =false;
 
-            printer.println(name + "," + username + "," + password);
-            JOptionPane.showMessageDialog(null, "registered done");
-            printer.close();
-            
-            this.dispose();
-            Login login = new Login();
-            login.setVisible(true);
+            while(scan.hasNext()){
+                scan.next();
+                savedUserName = scan.next();
+                scan.next();
+                if(username.equals(savedUserName.trim())){
+                    check = true;
+                    break;
+                }
+            }
+            if(check == true){
+                JOptionPane.showMessageDialog(null,"UserName is not valid");
+                Username_Field.setText("");
+            }
+            else{
+                try {
+                    FileOutputStream AccountsData2 = new FileOutputStream("AccountsData.txt", true);
+                    PrintWriter printer = new PrintWriter(AccountsData2);
 
-        } catch (Exception e) {
-               JOptionPane.showMessageDialog(null,"an error occured"+e);
+                    printer.println(name + "," + username + "," + password);
+                    JOptionPane.showMessageDialog(null, "registered done");
+                    printer.close();
+
+                    this.dispose();
+                    Login login = new Login();
+                    login.setVisible(true);
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null,"an error occured"+e);
+                }
+                CreateHistoryFile();
+                CreateContinueFile();
+            }
         }
-         CreateHistoryFile();
-         CreateContinueFile();
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,"an error occured"+e);
+        }
     }//GEN-LAST:event_Register_ButtonActionPerformed
 
     private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed

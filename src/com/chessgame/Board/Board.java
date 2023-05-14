@@ -22,8 +22,7 @@ public class Board {
 	public Piece died;
 	public Stack<Move> lastMoves = new Stack<>();
 	public Stack<Piece> deadPieces = new  Stack<>();
-//	public  List<Piece> piecesList = new ArrayList<>();
-	int testPull = 0;
+	public  List<Piece> piecesList = new ArrayList<>();
 
         
 
