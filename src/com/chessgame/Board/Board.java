@@ -24,7 +24,7 @@ public class Board {
 	public Stack<Piece> deadPieces = new  Stack<>();
 	public  List<Piece> piecesList = new ArrayList<>();
 
-        
+	
 
 	public Board() {
 		grid = new int[ROWS][COLUMNS];
@@ -50,7 +50,6 @@ public class Board {
 		if(pieces[toX][toY] != null) {
 			died = pieces[toX][toY];
 			deadPieces.add(died);
-//			piecesList.remove(died);
 			Game.AllPieces.remove(died);
 			Game.fillPieces();
 		}else {
@@ -61,29 +60,38 @@ public class Board {
 		pieces[fromX][fromY] = null;
 		pieces[toX][toY] = piece;
 	}
-	
+
+	// for undo feature
 	public void undoMove(Game game) {
-		if(!lastMoves.isEmpty()) {
-			Move move = lastMoves.pop();
-			Piece dead = deadPieces.pop();
-			grid[move.getFromX()][move.getFromY()] = move.getPiece().getValueInTheBoard();
+		if(!lastMoves.isEmpty()) {		// to check that the array list is not empty
+			Move move = lastMoves.pop();	// to undo the last move
+			Piece dead = deadPieces.pop();	 //	to get the last dead piece
+			grid[move.getFromX()][move.getFromY()] = move.getPiece().getValueInTheBoard();	//	to plot the piece to undo its move in its last position
 			pieces[move.getFromX()][move.getFromY()] = move.getPiece();
 			
-			move.getPiece().setXcord(move.getFromX());
+			move.getPiece().setXcord(move.getFromX());	// to set the x,y of the piece position
 			move.getPiece().setYcord(move.getFromY());
 			
-			if(move.getPiece() instanceof Pawn) {
+			if(move.getPiece() instanceof Pawn) {	// to make the pawn able to perform its 2 steps move if it was in its initial position
 				if(move.getPiece().getYcord() == (move.getPiece().isWhite() ? 6 : 1)) {
 					((Pawn)	move.getPiece()).setFirstMove(true);
 				}
 			}
 			
-			if(move.getPiece() instanceof Rook) {
+			if(move.getPiece() instanceof Rook) {	// this condition was made because to castle king and rook shouldn't have moved before
 				if(((Rook) move.getPiece()).isJustMoved()) {
 					((Rook) move.getPiece()).setHasMoved(false);
 					((Rook) move.getPiece()).setJustMoved(false);
 				}
 			}
+
+			if(move.getPiece() instanceof King) {	// this condition was made because to castle king and rook shouldn't have moved before
+				if(((King) move.getPiece()).isJustMoved()) {
+					((King) move.getPiece()).setHasMoved(false);
+					((King) move.getPiece()).setJustMoved(false);
+				}
+			}
+
 			if(dead != null) {
 				Game.AllPieces.add(dead);
 				Game.fillPieces();
@@ -126,16 +134,6 @@ public class Board {
 		}
 		return b;
 	}
-
-//	public void printBoard() {
-//		for(int i=0; i<8; i++) {
-//			for(int j=0; j<8; j++) {
-//				System.out.print(grid[j][i] +  "  ");
-//			}
-//			System.out.println();
-//		}
-//	}
-
 
 	// to save the current game to be continued
 	public void continueGame(boolean player){

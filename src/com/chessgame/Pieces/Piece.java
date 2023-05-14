@@ -123,6 +123,7 @@ public abstract class Piece implements Cloneable{//to enable the creation of a n
 		panel.revalidate(); 	// revalidate the panel to update the layout
 		panel.repaint();	 // repaint the panel to update the display
 	}
+	//	?????????
 	public void draw2(Graphics g, boolean player, int x, int y, JPanel panel) {
 			g.drawImage(image.getImage(), x - Piece.size/2, y- Piece.size/2, Piece.size, Piece.size, panel);
 			panel.revalidate();
