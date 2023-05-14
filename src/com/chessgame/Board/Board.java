@@ -127,16 +127,6 @@ public class Board {
 		return b;
 	}
 
-//	public void printBoard() {
-//		for(int i=0; i<8; i++) {
-//			for(int j=0; j<8; j++) {
-//				System.out.print(grid[j][i] +  "  ");
-//			}
-//			System.out.println();
-//		}
-//	}
-
-
 	// to save the current game to be continued
 	public void continueGame(boolean player){
 		StringBuilder s = new StringBuilder();

@@ -82,11 +82,7 @@ public class Pawn extends Piece {
 		if(isWhite && yCord == 0) {
 			return true;
 		}
-		
-		if(!isWhite && yCord == 7) {
-			return true;
-		}
-		return false;
+		return !isWhite && yCord == 7;
 	}
 
 	//return true for possible moves

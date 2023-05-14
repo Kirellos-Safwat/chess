@@ -275,6 +275,7 @@ modifications to the clone, we can ensure that the original game state is not af
 	// in brief, this method is for, when your king is in check no possible move is done unless it was to protect your
 	// king or to move it
 	// and this method is also for the case when you want to move a piece that protect the king
+
 	public static void checkLegalMoves(Piece piece) {
 		List<Move> movesToRemove = new ArrayList<>();
 		Board clonedBoard ;
@@ -387,11 +388,6 @@ modifications to the clone, we can ensure that the original game state is not af
 	//to plot the chosen piece
 	public static void choosePiece(Piece p, int choice) {
 		switch (choice) {
-//			case 0 -> {
-//				AllPieces.remove(p);
-//				p = new Queen(p.getXcord(), p.getYcord(), p.isWhite(), board, p.isWhite() ? 8 : -8);
-//				AllPieces.add(p);
-//			}
 			case 1 -> {
 				AllPieces.remove(p);
 				p = new Rook(p.getXcord(), p.getYcord(), p.isWhite(), board, p.isWhite() ? 5 : -5);
