@@ -5,6 +5,7 @@ import com.chessgame.Game.Game;
 
 public class King extends Piece {
 	private boolean hasMoved;
+	private boolean justMoved = false;
 	private Rook rook = null;
 	
 	public King(int x, int y, boolean isWhite, Board board, int value) {
@@ -39,6 +40,7 @@ public class King extends Piece {
 						rook.castleDone(xCord, board);
 					}					
 				}
+				justMoved = !hasMoved;
 				hasMoved = true;
 				return true;
 			}
@@ -48,8 +50,11 @@ public class King extends Piece {
 
 	@Override
 	public boolean canMove(int x, int y, Board board) {
+		//if the place that it is going to have ally piece, go to method cannotMove
 		if (board.getPiece(x,y) != null && board.getPiece(x,y).isWhite() == isWhite())
 			cannotMove(x,y,board);
+
+		//check if the king has the required mechanisms to reach this block(in method kingMoves)
 		if( kingMoves(x,y,board)) {
 			if(board.getPiece(x, y) == null) {
 				return true;
@@ -142,5 +147,14 @@ public class King extends Piece {
 	public void cannotMove(int x, int y, Board board){
 		if(kingMoves(x,y,board))
 			this.cannotMove.add(new Move(this.xCord,this.yCord,x,y,board.getPiece(x,y)));
+	}
+	public boolean isJustMoved() {
+		return justMoved;
+	}
+	public void setHasMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
+	}
+	public void setJustMoved(boolean justMoved) {
+		this.justMoved = justMoved;
 	}
 }
