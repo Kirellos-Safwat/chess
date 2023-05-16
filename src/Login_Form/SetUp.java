@@ -5,6 +5,7 @@
 package Login_Form;
 
 import com.chessgame.Frame.Frame;
+import com.chessgame.Frame.LabelTimer;
 
 import java.awt.*;
 import java.io.BufferedWriter;
@@ -202,6 +203,8 @@ public class SetUp extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
+        Frame.label1 = new LabelTimer(Player.minute,Player.second);
+        Frame.label2 = new LabelTimer(Player.minute,Player.second);
         this.dispose();
         Frame frame = new Frame();
     }//GEN-LAST:event_EnterGame_buttonActionPerformed

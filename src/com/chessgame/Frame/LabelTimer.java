@@ -8,7 +8,8 @@ import java.awt.*;
 public class LabelTimer extends JLabel {
     public int time;
     public Timer timer;
-    LabelTimer(int time_in_minutes , int time_in_seconds){
+
+    public LabelTimer(int time_in_minutes , int time_in_seconds){
 
         this.setFont(new Font("mv boli",Font.BOLD,24));
 
@@ -23,6 +24,9 @@ public class LabelTimer extends JLabel {
         });
 
     }
+
+
+
     //returns time in seconds
     public int time(int time){
         this.setText(time/60+" : "+ (time%60<10 ? "0"+time%60 : time%60));

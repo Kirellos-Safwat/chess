@@ -29,7 +29,7 @@ public class Game {
 	public static ArrayList<Piece> AllPieces = new ArrayList<>();    // contains all pieces
 	//	ArrayList<Move> allPossiblesMoves = new ArrayList<>();
 	public static List<Move> allEnemyMove = new ArrayList<>();
-	private static boolean gameOver = false;
+	public static boolean gameOver = false;
 
 
 	public Game() {
@@ -238,8 +238,8 @@ public class Game {
 			}
 		}
 		gameOver = true;
-		Frame.label1.timer.stop();
-		Frame.label2.timer.stop();
+//		Frame.label1.timer.stop();
+//		Frame.label2.timer.stop();
 	}
 
 	//	check legal moves of each piece of the team that has to play

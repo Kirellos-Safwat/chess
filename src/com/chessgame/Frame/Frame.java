@@ -1,9 +1,11 @@
 package com.chessgame.Frame;
 import Login_Form.*;
+import com.chessgame.Board.Board;
 import com.chessgame.Game.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 //import java.io.Serial;
 
 public class Frame extends JFrame {
@@ -13,15 +15,15 @@ public class Frame extends JFrame {
 	public static final int x = 640;
 	public static final int y = 640;
 
-	public static LabelTimer label1 = new LabelTimer(Player.minute,Player.second);
-	public static LabelTimer label2 = new LabelTimer(Player.minute,Player.second);
+	public static LabelTimer label1;
+	public static LabelTimer label2;
 	public static Panel board ;
 	JLabel player1 = new JLabel(SetUp.player1.name);
 	JLabel player2 = new JLabel(SetUp.player2.name);
 	public static JPanel wDead;
 	public static JPanel bDead;
 
-	private JButton settingsButton;
+	private JButton BackButton;
 	Music music = new Music();
 	String soundEffect = "MenuSoundEffect.wav";
 	public Frame() {
@@ -84,15 +86,15 @@ public class Frame extends JFrame {
 
 
 		JPanel sPanel = new JPanel(new BorderLayout());
-		settingsButton = new JButton("Settings");
-		settingsButton.setBackground(new Color(204, 204, 204));
-		settingsButton.setFont(new Font("Papyrus", 2, 24)); // NOI18N
-		settingsButton.addActionListener(new java.awt.event.ActionListener() {
+		BackButton = new JButton("Back");
+		BackButton.setBackground(new Color(204, 204, 204));
+		BackButton.setFont(new Font("Papyrus", 2, 24)); // NOI18N
+		BackButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				settingsButtonActionPerformed(evt);
+				BackButtonActionPerformed(evt);
 			}
 		});
-		sPanel.add(settingsButton,BorderLayout.WEST);
+		sPanel.add(BackButton,BorderLayout.WEST);
 //		sPanel.add(back, BorderLayout.WEST);
 //		JPanel ePanel = new JPanel();
 //		JPanel wPanel = new JPanel();
@@ -113,9 +115,20 @@ public class Frame extends JFrame {
 		this.setVisible(true);
 	}
 
-	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+	private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		music.PlaySoundEffect(soundEffect);
-		Login.settings.setVisible(true);
+//		Login.settings.setVisible(true);
+		 this.dispose();
+		 MainMenu mainMenu = new MainMenu();
+		 mainMenu.setVisible(true);
+		 Game.AllPieces =new ArrayList<>();
+		 Game.board =new Board();
+		 Game.allEnemyMove = new ArrayList<>();
+		 label1.timer.stop();
+		 label2.timer.stop();
+		 Game.drag = false;
+		 Game.player = true;
+		 Game.gameOver = false;
 	}
 //	private void backActionPerformed(java.awt.event.ActionEvent evt){
 ////		System.exit(0);
