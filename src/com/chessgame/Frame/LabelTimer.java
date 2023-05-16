@@ -11,6 +11,7 @@ public class LabelTimer extends JLabel {
     LabelTimer(int time_in_minutes , int time_in_seconds){
 
         this.setFont(new Font("mv boli",Font.BOLD,24));
+        this.setForeground(new Color(250,210,180));
 
         time = time_in_minutes*60 + time_in_seconds;
         time = time(time);

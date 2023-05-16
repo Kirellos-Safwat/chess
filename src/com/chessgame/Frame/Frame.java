@@ -1,5 +1,7 @@
 package com.chessgame.Frame;
-import Login_Form.*;
+import Login_Form.MainMenu;
+import Login_Form.Player;
+import Login_Form.SetUp;
 import com.chessgame.Game.Game;
 
 import javax.swing.*;
@@ -20,12 +22,7 @@ public class Frame extends JFrame {
 	JLabel player2 = new JLabel(SetUp.player2.name);
 	public static JPanel wDead;
 	public static JPanel bDead;
-
-	private JButton settingsButton;
-	Music music = new Music();
-	String soundEffect = "MenuSoundEffect.wav";
 	public Frame() {
-
 		this.setSize(1000, 820);
 		this.setLayout(new BorderLayout());
 		this.setTitle("Chess");
@@ -39,28 +36,21 @@ public class Frame extends JFrame {
 		bDead = new JPanel(new GridLayout(8,2));
 		bDead.setPreferredSize(new Dimension(160,640));
 
+
 		player1.setFont(new Font("mv boli",Font.BOLD,24));
+		player1.setForeground(new Color(227,210,180));
 		player2.setFont(new Font("mv boli",Font.BOLD,24));
-		//back button
-//		JButton back = new JButton("Back");
-//		back.addActionListener(this::backActionPerformed);//	back button listener
-//		back.setPreferredSize(new Dimension(70,30));
+		player2.setForeground(new Color(227,210,180));
+
 		//	for the north panel that contains {timer,players' name,back timer}
 		JPanel nPanel = new JPanel(new BorderLayout());
 		nPanel.setPreferredSize(new Dimension(640,95));
-
-//		JPanel nCenterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-//		nCenterPanel.add(back);
 
 		JPanel nLeftPanel = new JPanel(new BorderLayout());
 		nLeftPanel.setPreferredSize(new Dimension(428,100));
 		JPanel nRightPanel = new JPanel(new BorderLayout());
 		nRightPanel.setPreferredSize(new Dimension(428,100));
-//		JPanel nNorthPanel = new JPanel();
-//		nNorthPanel.setPreferredSize(new Dimension(680,40));
 
-//		nPanel.add(nNorthPanel,BorderLayout.NORTH);
-//		nPanel.add(nCenterPanel,BorderLayout.CENTER);
 		nPanel.add(nLeftPanel,BorderLayout.WEST);
 
 		JPanel nLeftNorth = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -83,19 +73,8 @@ public class Frame extends JFrame {
 		nRightSouth.add(label2);
 
 
-		JPanel sPanel = new JPanel(new BorderLayout());
-		settingsButton = new JButton("Settings");
-		settingsButton.setBackground(new Color(204, 204, 204));
-		settingsButton.setFont(new Font("Papyrus", 2, 24)); // NOI18N
-		settingsButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				settingsButtonActionPerformed(evt);
-			}
-		});
-		sPanel.add(settingsButton,BorderLayout.WEST);
-//		sPanel.add(back, BorderLayout.WEST);
-//		JPanel ePanel = new JPanel();
-//		JPanel wPanel = new JPanel();
+//		JPanel sPanel = new JPanel(new BorderLayout());
+
 
 
 		// Add components to containers
@@ -106,26 +85,51 @@ public class Frame extends JFrame {
 
 		add(centerContainer, BorderLayout.CENTER);
 		add(nPanel, BorderLayout.NORTH);
-		add(sPanel, BorderLayout.SOUTH);
-//		add(ePanel, BorderLayout.EAST);
-//		add(wPanel, BorderLayout.WEST);
+//		add(sPanel, BorderLayout.SOUTH);
+
+
+
+		JPanel bgPanel = new JPanel(new BorderLayout()) {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				ImageIcon bgImage = new ImageIcon("background2.jpg");
+				g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+			}
+		};
+
+// Set the layout of the content pane to BorderLayout
+		getContentPane().setLayout(new BorderLayout());
+
+// Set the opaque property of the board, wDead, and bDead panels to false
+		centerContainer.setOpaque(false);
+
+		board.setOpaque(false);
+		wDead.setOpaque(false);
+		bDead.setOpaque(false);
+
+
+		nPanel.setOpaque(false);
+
+		nRightPanel.setOpaque(false);
+		nRightNorth.setOpaque(false);
+		nRightSouth.setOpaque(false);
+
+
+		nLeftPanel.setOpaque(false);
+		nLeftNorth.setOpaque(false);
+		nLeftSouth.setOpaque(false);
+
+// Add the background panel to the content pane as the center component
+		getContentPane().add(bgPanel, BorderLayout.CENTER);
+
+// Add the other panels to the background panel
+		bgPanel.add(nPanel,BorderLayout.NORTH);
+		bgPanel.add(centerContainer,BorderLayout.CENTER);
+
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-
-	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		music.PlaySoundEffect(soundEffect);
-		Login.settings.setVisible(true);
-	}
-//	private void backActionPerformed(java.awt.event.ActionEvent evt){
-////		System.exit(0);
-//		this.dispose();
-//		MainMenu mainMenu = new MainMenu();
-//		mainMenu.setVisible(true);
-//		Game.board.lastMoves.clear();
-//		Game.board.deadPieces.clear();
-//		Game.AllPieces.clear();
-//	}
 }
 
 
